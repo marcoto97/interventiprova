@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827" />
+  <title>Interventi Tecnici</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="loginView" class="login-shell">
+      <div class="login-card">
+        <div class="brand-mark">IT</div>
+        <h1>Interventi Tecnici</h1>
+        <p class="muted">Gestionale rapporti di assistenza</p>
+
+        <form id="loginForm">
+          <label>Email
+            <input id="loginEmail" type="email" placeholder="tecnico@azienda.it" required>
+          </label>
+          <label>Password
+            <input id="loginPassword" type="password" placeholder="••••••••" required>
+          </label>
+          <button type="submit" class="btn primary full">Accedi</button>
+        </form>
+
+        <p class="demo-note">
+          Versione demo: inserisci qualsiasi email e password non vuote.
+        </p>
+      </div>
+    </section>
+
+    <div id="mainApp" class="layout hidden">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark small">IT</div>
+          <div>
+            <strong>Interventi</strong>
+            <span>Tecnici</span>
+          </div>
+        </div>
+
+        <nav>
+          <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+          <button class="nav-btn" data-view="nuovo">Nuovo intervento</button>
+          <button class="nav-btn" data-view="interventi">Interventi</button>
+          <button class="nav-btn" data-view="clienti">Clienti</button>
+        </nav>
+
+        <button id="logoutBtn" class="nav-btn danger">Esci</button>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <button id="menuBtn" class="menu-btn">☰</button>
+          <div>
+            <h2 id="pageTitle">Dashboard</h2>
+            <p id="welcomeText" class="muted"></p>
+          </div>
+          <button class="btn primary" data-go="nuovo">+ Nuovo</button>
+        </header>
+
+        <section id="dashboard" class="view active-view">
+          <div class="stats-grid">
+            <article class="stat-card"><span>Interventi totali</span><strong id="statTotali">0</strong></article>
+            <article class="stat-card"><span>Aperti</span><strong id="statAperti">0</strong></article>
+            <article class="stat-card"><span>Completati</span><strong id="statCompletati">0</strong></article>
+            <article class="stat-card"><span>Clienti</span><strong id="statClienti">0</strong></article>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>Ultimi interventi</h3>
+              <button class="link-btn" data-go="interventi">Vedi tutti</button>
+            </div>
+            <div id="recentTable"></div>
+          </div>
+        </section>
+
+        <section id="nuovo" class="view">
+          <div class="panel">
+            <h3>Nuovo rapporto di intervento</h3>
+            <form id="interventoForm" class="form-grid">
+              <label>Cliente
+                <select id="clienteSelect" required></select>
+              </label>
+              <label>Data
+                <input id="dataIntervento" type="date" required>
+              </label>
+              <label>Ora inizio
+                <input id="oraInizio" type="time" required>
+              </label>
+              <label>Ora fine
+                <input id="oraFine" type="time">
+              </label>
+              <label>Macchina / Modello
+                <input id="macchina" type="text" placeholder="Es. Canon C3930">
+              </label>
+              <label>Seriale
+                <input id="seriale" type="text" placeholder="Numero seriale">
+              </label>
+              <label class="wide">Problema segnalato
+                <textarea id="problema" rows="4" required></textarea>
+              </label>
+              <label class="wide">Intervento eseguito
+                <textarea id="lavoro" rows="5" required></textarea>
+              </label>
+              <label class="wide">Materiali / ricambi
+                <textarea id="materiali" rows="3"></textarea>
+              </label>
+              <label>Stato
+                <select id="stato">
+                  <option>Aperto</option>
+                  <option>In lavorazione</option>
+                  <option selected>Completato</option>
+                </select>
+              </label>
+              <label>Tecnico
+                <input id="tecnico" type="text" placeholder="Nome tecnico">
+              </label>
+              <div class="wide action-row">
+                <button type="reset" class="btn secondary">Pulisci</button>
+                <button type="submit" class="btn primary">Salva intervento</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section id="interventi" class="view">
+          <div class="panel">
+            <div class="panel-head wrap">
+              <h3>Archivio interventi</h3>
+              <input id="searchInterventi" class="search" type="search" placeholder="Cerca cliente, seriale, macchina...">
+            </div>
+            <div id="interventiTable"></div>
+          </div>
+        </section>
+
+        <section id="clienti" class="view">
+          <div class="two-col">
+            <div class="panel">
+              <h3>Nuovo cliente</h3>
+              <form id="clienteForm" class="form-grid single">
+                <label>Ragione sociale
+                  <input id="clienteNome" required>
+                </label>
+                <label>Email
+                  <input id="clienteEmail" type="email">
+                </label>
+                <label>Telefono
+                  <input id="clienteTelefono">
+                </label>
+                <label>Indirizzo
+                  <input id="clienteIndirizzo">
+                </label>
+                <button class="btn primary" type="submit">Aggiungi cliente</button>
+              </form>
+            </div>
+
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Clienti</h3>
+                <span id="clientCount" class="badge">0</span>
+              </div>
+              <div id="clientList"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="/app-client.js"></script>
+</body>
+</html>
